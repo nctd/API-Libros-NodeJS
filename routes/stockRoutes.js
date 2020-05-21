@@ -10,7 +10,7 @@ router
 
 router
   .route('/:id')
-  // .get(stockController.getStockTienda)
+  .get(stockController.getStock)
   .patch(stockController.editarStock)
   .delete(stockController.borrarStock);
 

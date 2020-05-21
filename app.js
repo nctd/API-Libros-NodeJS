@@ -12,12 +12,14 @@ const librosRoute = require('./routes/libroRoutes');
 const stocksRoute = require('./routes/stockRoutes');
 const reservasRoute = require('./routes/reservaRoutes');
 const ventasRoute = require('./routes/ventaRoutes');
+const boletasRoute = require('./routes/boletaRoutes');
 
 app.use('/libros', librosRoute);
 app.use('/tiendas', tiendasRoute);
 app.use('/stocks', stocksRoute);
 app.use('/reservas', reservasRoute);
 app.use('/ventas', ventasRoute);
+app.use('/boletas', boletasRoute);
 
 // RUTAS
 app.get('/', (req, res) => {

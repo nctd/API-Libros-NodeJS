@@ -2,6 +2,7 @@ const factory = require('./handlerFactory');
 const Tienda = require('./../models/Tienda');
 const Reserva = require('./../models/Reserva');
 const Stock = require('./../models/Stock');
+const Venta = require('./../models/Venta');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getTienda = factory.Buscar(Tienda);
@@ -49,6 +50,33 @@ exports.getTiendaReservas = catchAsync(async (req, res, next) => {
       status: 'error',
       data: {
         data: error.message,
+      },
+    });
+  }
+});
+
+exports.getTiendaVentas = catchAsync(async (req, res, next) => {
+  try {
+    const tienda = (await Tienda.findById(req.params.id)).id;
+
+    const ventas = await Venta.find({ tienda: tienda });
+
+    if (ventas.length == 0) {
+      throw (error = {
+        data: `No hay ventas registradas en esta tienda `,
+      });
+    }
+    res.status(200).json({
+      status: 'success',
+      data: {
+        data: ventas,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'error',
+      data: {
+        data: error,
       },
     });
   }

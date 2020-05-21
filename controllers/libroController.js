@@ -2,6 +2,7 @@ const factory = require('./handlerFactory');
 const Libro = require('./../models/Libro');
 const Stock = require('./../models/Stock');
 const Reserva = require('./../models/Reserva');
+const Venta = require('./../models/Venta');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getLibro = factory.Buscar(Libro);
@@ -53,6 +54,35 @@ exports.getLibroReservas = catchAsync(async (req, res, next) => {
       status: 'error',
       data: {
         data: error.message,
+      },
+    });
+  }
+});
+
+exports.getLibroVentas = catchAsync(async (req, res, next) => {
+  try {
+    const libro = (await Libro.findById(req.params.id)).id;
+    const nombreLibro = (await Libro.findById(req.params.id)).titulo;
+
+    const ventas = await Venta.find({ libro: libro });
+
+    if (ventas.length == 0) {
+      throw (error = {
+        data: `No hay ventas registradas para el libro: ${nombreLibro} `,
+      });
+    }
+    res.status(200).json({
+      status: 'success',
+      nombre_libro: nombreLibro,
+      data: {
+        data: ventas,
+      },
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'error',
+      data: {
+        data: error,
       },
     });
   }

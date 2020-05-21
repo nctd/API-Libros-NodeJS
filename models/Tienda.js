@@ -13,6 +13,10 @@ const TiendaSchema = mongoose.Schema(
     tipo: {
       type: String,
       required: [true, 'Debe ingresar un tipo'],
+      enum: {
+        values: ['tienda', 'bodega'],
+        message: 'Tipo debe ser: tienda o bodega',
+      },
     },
   },
   { timestamps: true }

@@ -15,15 +15,6 @@ const ReservaSchema = mongoose.Schema(
       type: Date,
       required: [true, 'Ingrese fecha de entrega'],
     },
-    despacho: {
-      type: Boolean,
-      required: [true, 'Seleccione un tipo de despacho'],
-      //Si es falso,se requiere una tienda
-    },
-    direccion: {
-      type: String,
-      // required: [true, 'Ingrese una direccion'],
-    },
   },
   { timestamps: true }
 );

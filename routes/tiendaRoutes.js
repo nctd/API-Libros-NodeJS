@@ -16,4 +16,5 @@ router
 
 router.route('/:id/stocks').get(tiendaController.getTiendaStock);
 router.route('/:id/reservas').get(tiendaController.getTiendaReservas);
+router.route('/:id/ventas').get(tiendaController.getTiendaVentas);
 module.exports = router;

@@ -2,13 +2,21 @@ const mongoose = require('mongoose');
 
 const VentaSchema = mongoose.Schema(
   {
-    libro: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Libro',
-        required: [true, 'Debe seleccionar un libro para la reserva'],
-      },
-    ],
+    rut_cliente: {
+      type: String,
+      required: [true, 'Ingrese rut'],
+    },
+    libro: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Libro',
+      required: [true, 'Debe seleccionar un libro para la reserva'],
+    },
+    cantidad: {
+      type: Number,
+      min: [1, 'Cantidad debe ser mayor a 1'],
+      max: [99, 'Cantidad debe ser menor a 100'],
+      required: [true, 'Debe indicar una cantidad'],
+    },
     tienda: {
       type: mongoose.Schema.ObjectId,
       ref: 'Tienda',
@@ -16,20 +24,7 @@ const VentaSchema = mongoose.Schema(
     },
     total: {
       type: Number,
-      required: [true, 'Ingrese el total de la venta'],
-    },
-    fecha_entrega: {
-      type: Date,
-      required: [true, 'Ingrese fecha de entrega'],
-    },
-    despacho: {
-      type: Boolean,
-      required: [true, 'Seleccione un tipo de despacho'],
-      //Si es falso,se requiere una tienda
-    },
-    direccion: {
-      type: String,
-      // required: [true, 'Ingrese una direccion'],
+      // required: [true, 'Ingrese el total de la venta'],
     },
   },
   { timestamps: true }

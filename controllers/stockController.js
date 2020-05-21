@@ -5,6 +5,7 @@ const factory = require('./handlerFactory');
 const catchAsync = require('../utils/catchAsync');
 
 exports.getStocks = factory.mostrarTodos(Stock);
+exports.getStock = factory.Buscar(Stock);
 // exports.crearStock = factory.Agregar(Stock);
 exports.editarStock = factory.Actualizar(Stock);
 exports.borrarStock = factory.Borrar(Stock);

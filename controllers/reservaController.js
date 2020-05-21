@@ -13,28 +13,10 @@ exports.crearReserva = catchAsync(async (req, res, next) => {
     libro: req.body.libro,
     tienda: req.body.tienda,
     fecha_disponible: req.body.fecha_disponible,
-    despacho: req.body.despacho,
-    direccion: req.body.direccion,
   });
   try {
     const libro = await Libro.findById(reserva.libro);
     if (!libro.estado) {
-      if (reserva.despacho) {
-        reserva.tienda = null;
-        if (reserva.direccion == null) {
-          throw error;
-        }
-      }
-      if (reserva.despacho == false && reserva.tienda == null) {
-        data = 'Ingrese una tienda para el retiro del producto';
-        res.status(404).json({
-          status: 'error',
-          data: {
-            data: data,
-          },
-        });
-      }
-
       const doc = await reserva.save();
       res.status(201).json({
         status: 'success',
@@ -53,7 +35,7 @@ exports.crearReserva = catchAsync(async (req, res, next) => {
     }
   } catch (error) {
     res.status(404).json({
-      status: 'No se realizo la reserva',
+      status: 'error',
       data: {
         data: error,
       },
