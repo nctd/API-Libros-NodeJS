@@ -10,6 +10,7 @@ exports.borrarReserva = factory.Borrar(Reserva);
 
 exports.crearReserva = catchAsync(async (req, res, next) => {
   const reserva = new Reserva({
+    rut_cliente: req.body.rut_cliente,
     libro: req.body.libro,
     tienda: req.body.tienda,
     fecha_disponible: req.body.fecha_disponible,
@@ -25,13 +26,7 @@ exports.crearReserva = catchAsync(async (req, res, next) => {
         },
       });
     } else {
-      data = 'El libro no esta disponible para reservar';
-      res.status(404).json({
-        status: 'error',
-        data: {
-          data: data,
-        },
-      });
+      throw (error = { data: 'El libro no esta disponible para reservar' });
     }
   } catch (error) {
     res.status(404).json({

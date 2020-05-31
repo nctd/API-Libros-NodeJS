@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const ReservaSchema = mongoose.Schema(
   {
+    rut_cliente: {
+      type: String,
+      required: [true, 'Ingrese rut'],
+    },
     libro: {
       type: mongoose.Schema.ObjectId,
       ref: 'Libro',
@@ -10,15 +14,14 @@ const ReservaSchema = mongoose.Schema(
     tienda: {
       type: mongoose.Schema.ObjectId,
       ref: 'Tienda',
+      required: [true, 'Debe seleccionar una tienda para la reserva'],
     },
-    fecha_entrega: {
+    fecha_disponible: {
       type: Date,
       required: [true, 'Ingrese fecha de entrega'],
     },
   },
   { timestamps: true }
 );
-
-// VentaSchema.index({ libro: 1, tienda: 1 }, { unique: true });
 
 module.exports = mongoose.model('Reservas', ReservaSchema);

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Libro = require('./Libro');
 
 const StockSchema = mongoose.Schema(
   {

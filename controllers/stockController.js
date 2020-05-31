@@ -6,7 +6,6 @@ const catchAsync = require('../utils/catchAsync');
 
 exports.getStocks = factory.mostrarTodos(Stock);
 exports.getStock = factory.Buscar(Stock);
-// exports.crearStock = factory.Agregar(Stock);
 exports.editarStock = factory.Actualizar(Stock);
 exports.borrarStock = factory.Borrar(Stock);
 
@@ -27,11 +26,8 @@ exports.agregarStock = catchAsync(async (req, res, next) => {
         },
       });
     } else {
-      res.status(404).json({
-        status: 'Libro no disponible',
-        data: {
-          data: error,
-        },
+      throw (error = {
+        data: 'Libro no disponible',
       });
     }
   } catch (error) {
